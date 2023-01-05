@@ -9,45 +9,134 @@ function getComputerSelection() {
     computerSelection = arrayChoices[Math.floor(Math.random() * arrayChoices.length)];
 } 
 
-function getPlayerSelection() {
-playerSelection = prompt("Please enter your choice").toLowerCase();
        
-}
+
 
 function playRound(playerSelection, computerSelection) {
-    
+    getComputerSelection();
+
 
     if (playerSelection === 'rock' && computerSelection === 'scissors') {
         ++playerScore;
-        return `You win! Rock Beats Scissors. The current score is You: ${playerScore} : ${computerScore} Robotman.`;
+        document.getElementById('current').innerHTML = `Current Round: You win! Rock Beats Scissors.`;
+        
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
         ++computerScore;
-        return `You lose! Paper Beat Rock. The current score is You: ${playerScore} : ${computerScore} Robotman.`;
+        document.getElementById('current').innerHTML = `Current Round: You lose! Paper Beat Rock.`;
     } else if (playerSelection === 'rock' && computerSelection === 'rock') {
-        
-        return `Its a draw! The current score is You: ${playerScore} : ${computerScore} Robotman.`;
+        ++playerScore;
+        ++computerScore
+        document.getElementById('current').innerHTML = `Current Round: Its a draw!`;
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
         ++playerScore;
-        return `You win! Paper Beats Rock. The current score is You: ${playerScore} : ${computerScore} Robotman.`;
+        document.getElementById('current').innerHTML = `Current Round: You win! Paper Beats Rock.`;
     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
         ++computerScore;
-        return `You lose! Scissors Beat Paper. The current score is You: ${playerScore} : ${computerScore} Robotman.`;
-    } else if (playerSelection === 'paper' && computerSelection === 'paper') {
-        return `Its a draw! The current score is You: ${playerScore} : ${computerScore} Robotman.`;
+        document.getElementById('current').innerHTML = `Current Round: You lose! Scissors Beat Paper.`;
+        ++playerScore;
+        ++computerScore
+        document.getElementById('current').innerHTML = `Current Round: Its a draw!`;
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
         ++computerScore;
-        return `You lose! Rock beats Scissors. The current score is You: ${playerScore} : ${computerScore} Robotman.`;
+        document.getElementById('current').innerHTML = `Current Round: You lose! Rock beats Scissors.`;
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
         ++playerScore;
-        return `You win! Scissors Beat Paper. The current score is You: ${playerScore} : ${computerScore} Robotman.`;
+        document.getElementById('current').innerHTML = `Current Round: You win! Scissors Beat Paper.`;
     } else if (playerSelection === 'scissors' && computerSelection === 'scissors') {
-        return `Its a draw! The current score is You: ${playerScore} : ${computerScore} Robotman.`;
+        ++playerScore;
+        ++computerScore;
+        document.getElementById('current').innerHTML = `Current Round: Its a draw!`;
 
+        
     }
+  
     }
+    
+var rock = document.getElementById('rock');
+rock.addEventListener('click', () => { 
+    console.log(playRound('rock', computerSelection));
+    if (playerScore === 5 && playerScore > computerScore) {
+        const results = document.querySelector('#results');
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = 'Final Result: You are the winner!';
+        container.appendChild(content);
+    } else if (computerScore === 5 && computerScore > playerScore) {
+        const results = document.querySelector('#results');
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = 'Final Result: You are the loser!';
+        container.appendChild(content);
+        
+    } else if (computerScore === 5 && playerScore === 5) {
+        const results = document.querySelector('#results');
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = `Final Result: It's a draw!`;
+        container.appendChild(content);
+    }
+    document.getElementById('results').innerHTML = `The score is You: ${playerScore} Robotman : ${computerScore}`;
+
+})
+var paper = document.getElementById('paper');
+paper.addEventListener('click', () => { 
+    console.log(playRound('paper', computerSelection));
+    if (playerScore === 5 && playerScore > computerScore) {
+        const results = document.querySelector('#results');
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = 'You are the winner!';
+        container.appendChild(content);
+    } else if (computerScore === 5 && computerScore > playerScore) {
+        const results = document.querySelector('#results');
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = 'You are the loser!';
+        container.appendChild(content);
+        
+    } else if (computerScore === 5 && playerScore === 5) {
+        const results = document.querySelector('#results');
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = `It's a draw!`;
+        container.appendChild(content);
+    }
+    document.getElementById('results').innerHTML = `The score is You: ${playerScore} Robotman : ${computerScore}`;
+})
+
+var scissors = document.getElementById('scissors');
+scissors.addEventListener('click', () => { 
+    console.log(playRound('scissors', computerSelection));
+    if (playerScore === 5 && playerScore > computerScore) {
+        const results = document.querySelector('#results');
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = 'You are the winner!';
+        container.appendChild(content);
+    } else if (computerScore === 5 && computerScore > playerScore) {
+        const results = document.querySelector('#results');
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = 'You are the loser!';
+        container.appendChild(content);
+        
+    } else if (computerScore === 5 && playerScore === 5) {
+        const results = document.querySelector('#results');
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = `It's a draw!`;
+        container.appendChild(content);
+    }
+    document.getElementById('current').innerHTML = `The score is You: ${playerScore} Robotman : ${computerScore}`;
+  
+
+    
+})
+
+ 
+
 
 function game() {
-    for (let i = 0; i < 5; i++) {
         getComputerSelection();
         getPlayerSelection();
         console.log(playRound(playerSelection, computerSelection));
@@ -61,5 +150,4 @@ function game() {
     } else {
         console.log(`Its a draw with a score of You : ${playerScore} to Robotman ${computerScore}`)
     }
-}
-game()
+
